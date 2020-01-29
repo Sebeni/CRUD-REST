@@ -31,4 +31,4 @@ echo There were errors
 
 :end
 echo.
-echo Work is finished.
+echo runcrud script is finished.
