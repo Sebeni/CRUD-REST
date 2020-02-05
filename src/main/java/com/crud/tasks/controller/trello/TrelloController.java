@@ -18,9 +18,9 @@ import java.util.List;
 public class TrelloController {
     @Autowired
     TrelloClient trelloClient;
-    
+
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
-    public void getTrelloBoards(){
+    public void getTrelloBoards() {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
         trelloBoards.forEach(trelloBoardDto -> {
@@ -34,10 +34,11 @@ public class TrelloController {
 
         });
     }
-    
+
     @RequestMapping(method = RequestMethod.POST, value = "createTrelloCard")
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloClient.createNewCard(trelloCardDto);
     }
+    
     
 }
