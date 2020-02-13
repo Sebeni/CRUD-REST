@@ -8,15 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-class SimpleMailServiceTest {
+class SimpleEmailServiceTest {
     
     @InjectMocks
-    private SimpleMailService simpleMailService;
+    private SimpleEmailService simpleEmailService;
     
     @Mock
     private JavaMailSender javaMailSender;
@@ -31,7 +30,7 @@ class SimpleMailServiceTest {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         
-        simpleMailService.send(mail);
+        simpleEmailService.send(mail);
         
         verify(javaMailSender, times(1)).send(mailMessage);
     }
