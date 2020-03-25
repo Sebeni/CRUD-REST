@@ -1,9 +1,11 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.mail.Mail;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +21,9 @@ class SimpleEmailServiceTest {
     
     @Mock
     private JavaMailSender javaMailSender;
+    
+    @Autowired
+    AdminConfig adminConfig;
 
     @Test
     void shouldSendEmailWithoutCc() {
