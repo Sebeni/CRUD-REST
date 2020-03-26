@@ -26,18 +26,9 @@ public class TrelloFacade {
         return trelloMapper.mapToBoardDtoList(filteredBoards);
     }
 
-    private List<TrelloBoard> validateTrelloBoards(List<TrelloBoard> fetchedTrelloBoards) {
-        return trelloValidator.validateTrelloBoards(fetchedTrelloBoards);
-    }
-
     public CreatedTrelloCardDto createCard(TrelloCardDto trelloCardDto) {
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
         trelloValidator.validateCard(trelloCard);
         return trelloService.createTrelloCard(trelloMapper.mapToCardDto(trelloCard));
     }
-
-    private void validateCard(TrelloCard trelloCard) {
-        trelloValidator.validateCard(trelloCard);
-    }
-
 }

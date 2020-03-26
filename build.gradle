@@ -36,6 +36,7 @@ dependencies {
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.2.4.RELEASE'
+	testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 }
 
 test {
