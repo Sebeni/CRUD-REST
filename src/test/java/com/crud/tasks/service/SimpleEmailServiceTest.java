@@ -2,6 +2,7 @@ package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.mail.Mail;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,6 +26,7 @@ class SimpleEmailServiceTest {
     @Autowired
     AdminConfig adminConfig;
 
+    @Ignore
     @Test
     void shouldSendEmailWithoutCc() {
         
