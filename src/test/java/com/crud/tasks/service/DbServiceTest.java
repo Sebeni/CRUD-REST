@@ -72,4 +72,27 @@ class DbServiceTest {
 
         assertEquals(dbBeforeSave, dbService.getAllTasks().size());
     }
+    
+    @Test
+    void get3LatestTasksTitles() {
+        Task firstTaskToAdd = new Task(null, "TEST_TASK_ONE", "new content");
+        Task secondTaskToAdd = new Task(null, "TEST_TASK_TWO", "new content");
+        Task thirdTaskToAdd = new Task(null, "TEST_TASK_THREE", "new content");
+        
+        dbService.saveTask(firstTaskToAdd);
+        dbService.saveTask(secondTaskToAdd);
+        dbService.saveTask(thirdTaskToAdd);
+        
+        List<Task> latestTasksTitles = dbService.getLatestTasks(3);
+        latestTasksTitles.stream().forEach(task -> System.out.println(task.getTitle()));
+        
+        assertEquals(3, latestTasksTitles.size());
+        assertEquals(firstTaskToAdd.getTitle(), latestTasksTitles.get(2).getTitle());
+        assertEquals(secondTaskToAdd.getTitle(), latestTasksTitles.get(1).getTitle());
+        assertEquals(thirdTaskToAdd.getTitle(), latestTasksTitles.get(0).getTitle());
+        
+        dbService.deleteTask(firstTaskToAdd.getId());
+        dbService.deleteTask(secondTaskToAdd.getId());
+        dbService.deleteTask(thirdTaskToAdd.getId());
+    }
 }

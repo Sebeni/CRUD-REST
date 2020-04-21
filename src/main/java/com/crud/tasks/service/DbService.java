@@ -29,4 +29,8 @@ public class DbService {
         repository.deleteById(taskId);
     }
     
+    public List<Task> getLatestTasks(int taskLimit) {
+        return repository.getLatestTasks(taskLimit);
+    }
+    
 }

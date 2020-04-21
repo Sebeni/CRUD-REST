@@ -15,10 +15,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-class SimpleEmailServiceTest {
+class TemplateEmailSendingServiceTest {
     
     @InjectMocks
-    private SimpleEmailService simpleEmailService;
+    private TemplateEmailSendingService templateEmailSendingService;
     
     @Mock
     private JavaMailSender javaMailSender;
@@ -37,7 +37,7 @@ class SimpleEmailServiceTest {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         
-        simpleEmailService.send(mail);
+//        simpleEmailService.send(mail);
         
         verify(javaMailSender, times(1)).send(mailMessage);
     }

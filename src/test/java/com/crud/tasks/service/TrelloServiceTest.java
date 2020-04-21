@@ -25,7 +25,7 @@ class TrelloServiceTest {
     TrelloClient trelloClient;
     
     @Mock
-    SimpleEmailService simpleEmailService;
+    TemplateEmailSendingService templateEmailSendingService;
     
     @Mock
     AdminConfig adminConfig;
@@ -49,7 +49,7 @@ class TrelloServiceTest {
         TrelloCardDto trelloCardDto = new TrelloCardDto("name card", "description of card", "5", "6");
         when(trelloClient.createNewCard(trelloCardDto)).thenReturn(cardDto);
         when(adminConfig.getAdminMail()).thenReturn("adminMail");
-        doNothing().when(simpleEmailService).send(any(Mail.class));
+        doNothing().when(templateEmailSendingService).send(any(Mail.class), any(MailType.class));
         
         CreatedTrelloCardDto cardFromService = trelloService.createTrelloCard(trelloCardDto);
         
@@ -59,7 +59,7 @@ class TrelloServiceTest {
         );
         
         verify(trelloClient, times(1)).createNewCard(trelloCardDto);
-        verify(simpleEmailService, times(1)).send(any(Mail.class));
+        verify(templateEmailSendingService, times(1)).send(any(Mail.class), any(MailType.class));
         verify(adminConfig, atMostOnce()).getAdminMail();
     }
 }
