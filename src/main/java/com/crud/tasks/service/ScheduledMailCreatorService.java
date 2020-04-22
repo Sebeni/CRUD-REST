@@ -1,6 +1,7 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
+import com.crud.tasks.domain.task.Task;
 import org.springframework.core.env.Environment;
 import org.thymeleaf.TemplateEngine;
 
@@ -10,12 +11,12 @@ import java.util.stream.Collectors;
 public class ScheduledMailCreatorService extends MailCreatorService {
     private static final String SCHEDULED_TEMPLATE_PATH = "mail/scheduled-mail.html";
     private static final int LATEST_TASK_LIMIT = 3;
-    private DbService dbService;
+    private final DbService dbService;
     
     
     @Override
     protected void populateContext() {
-        List<String> latestTaskTitles = getLatestTasksTitles(LATEST_TASK_LIMIT);
+        List<String> latestTaskTitles = getLatestTasksTitles();
         boolean moreThanOneTask = latestTaskTitles.size() > 1;
         context.setVariable("more_than_one_task", moreThanOneTask);
         context.setVariable("latest_tasks_list", latestTaskTitles);
@@ -32,7 +33,7 @@ public class ScheduledMailCreatorService extends MailCreatorService {
         this.dbService = dbService;
     }
     
-    private List<String> getLatestTasksTitles(int taskLimit) {
-        return dbService.getLatestTasks(taskLimit).stream().map(task -> task.getTitle()).collect(Collectors.toList());
+    private List<String> getLatestTasksTitles() {
+        return dbService.getLatestTasks(ScheduledMailCreatorService.LATEST_TASK_LIMIT).stream().map(Task::getTitle).collect(Collectors.toList());
     }
 }

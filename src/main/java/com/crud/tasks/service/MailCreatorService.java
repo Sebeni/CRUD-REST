@@ -1,16 +1,14 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 public abstract class MailCreatorService {
-    protected TemplateEngine templateEngine;
-    protected AdminConfig adminConfig;
-    protected Environment environment;
+    protected final TemplateEngine templateEngine;
+    protected final AdminConfig adminConfig;
+    protected final Environment environment;
     protected Context context;
 
     public String buildEmail(String message){

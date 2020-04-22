@@ -4,7 +4,6 @@ import com.crud.tasks.domain.trello.*;
 import com.crud.tasks.trello.facade.TrelloFacade;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatcher;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TrelloController.class)
 class TrelloControllerTest {
-    private static String controllerUrl = "/v1/trello";
+    private static final String controllerUrl = "/v1/trello";
 
     @Autowired
     private MockMvc mockMvc;
@@ -35,7 +34,7 @@ class TrelloControllerTest {
         List<TrelloBoardDto> trelloBoards = new ArrayList<>();
         when(trelloFacade.fetchTrelloBoards()).thenReturn(trelloBoards);
 
-        mockMvc.perform(get(controllerUrl + "/getTrelloBoards").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(controllerUrl + "/boards").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
@@ -50,7 +49,7 @@ class TrelloControllerTest {
 
         when(trelloFacade.fetchTrelloBoards()).thenReturn(trelloBoards);
 
-        mockMvc.perform(get(controllerUrl + "/getTrelloBoards"))
+        mockMvc.perform(get(controllerUrl + "/boards"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is("1")))
@@ -80,7 +79,7 @@ class TrelloControllerTest {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(trelloCardDto);
         
-        mockMvc.perform(post(controllerUrl + "/createTrelloCard")
+        mockMvc.perform(post(controllerUrl + "/cards")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))

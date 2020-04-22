@@ -84,7 +84,6 @@ class DbServiceTest {
         dbService.saveTask(thirdTaskToAdd);
         
         List<Task> latestTasksTitles = dbService.getLatestTasks(3);
-        latestTasksTitles.stream().forEach(task -> System.out.println(task.getTitle()));
         
         assertEquals(3, latestTasksTitles.size());
         assertEquals(firstTaskToAdd.getTitle(), latestTasksTitles.get(2).getTitle());
